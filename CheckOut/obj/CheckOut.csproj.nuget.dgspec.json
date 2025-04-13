@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Liam\\Desktop\\CheckOut\\CheckOut\\CheckOut.csproj": {}
+    "C:\\Users\\Liam\\Desktop\\CheckOut-DotNet-App\\CheckOut\\CheckOut.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Liam\\Desktop\\CheckOut\\CheckOut\\CheckOut.csproj": {
+    "C:\\Users\\Liam\\Desktop\\CheckOut-DotNet-App\\CheckOut\\CheckOut.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Liam\\Desktop\\CheckOut\\CheckOut\\CheckOut.csproj",
+        "projectUniqueName": "C:\\Users\\Liam\\Desktop\\CheckOut-DotNet-App\\CheckOut\\CheckOut.csproj",
         "projectName": "CheckOut",
-        "projectPath": "C:\\Users\\Liam\\Desktop\\CheckOut\\CheckOut\\CheckOut.csproj",
+        "projectPath": "C:\\Users\\Liam\\Desktop\\CheckOut-DotNet-App\\CheckOut\\CheckOut.csproj",
         "packagesPath": "C:\\Users\\Liam\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Liam\\Desktop\\CheckOut\\CheckOut\\obj\\",
+        "outputPath": "C:\\Users\\Liam\\Desktop\\CheckOut-DotNet-App\\CheckOut\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Liam\\AppData\\Roaming\\NuGet\\NuGet.Config",

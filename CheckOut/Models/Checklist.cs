@@ -1,0 +1,15 @@
+using System;
+using System.Collections.Generic;
+
+namespace CheckOut.Models
+{
+    public class Checklist
+    {
+        public int ChecklistId { get; set; }
+        public string Title { get; set; } = "";
+        public DateTime DateCreated { get; set; } = DateTime.Now;
+        public bool IsArchived { get; set; }
+
+        public List<ToDo> ToDos { get; set; } = new List<ToDo>();
+    }
+}
