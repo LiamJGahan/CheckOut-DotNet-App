@@ -7,6 +7,6 @@ namespace CheckOut.Models
         public bool IsComplete { get; set; }
 
         public int ChecklistId { get; set; }
-        public Checklist Checklist { get; set; } = new Checklist();
+        public Checklist Checklist { get; set; }
     }
 }
