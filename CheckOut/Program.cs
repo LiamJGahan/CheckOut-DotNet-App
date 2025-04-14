@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using CheckOut.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add EF and string connection (currently using secrets)
+builder.Services.AddDbContext<CheckOutContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), 
+        sqlOptions => sqlOptions.EnableRetryOnFailure())); // Added this due to cloud transient error
 
 var app = builder.Build();
 
