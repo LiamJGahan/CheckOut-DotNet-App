@@ -5,7 +5,7 @@ namespace CheckOut.Models
         public int ChecklistId { get; set; }
         public string Title { get; set; } = "";
         public DateTime DateCreated { get; set; } = DateTime.Now;
-        public bool IsArchived { get; set; }
+        public bool IsArchived { get; set; } = false;
 
         public List<ToDo> ToDos { get; set; } = new List<ToDo>();
     }

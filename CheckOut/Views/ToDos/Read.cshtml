@@ -1,0 +1,9 @@
+@model List<CheckOut.Models.ToDo>
+
+<h2>My ToDo</h2>
+<ul>
+    @foreach (var toDo in Model)
+    {
+        <li> @toDo.Description - @toDo.IsComplete - @toDo.ChecklistId</li>
+    }
+</ul>

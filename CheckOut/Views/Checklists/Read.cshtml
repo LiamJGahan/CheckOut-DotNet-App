@@ -1,0 +1,9 @@
+@model List<CheckOut.Models.Checklist>
+
+<h2>My Checklist</h2>
+<ul>
+    @foreach (var checklist in Model)
+    {
+        <li> @checklist.Title - @checklist.DateCreated - @checklist.IsArchived</li>
+    }
+</ul>

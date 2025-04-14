@@ -1,0 +1,18 @@
+@model List<CheckOut.Models.Checklist>
+
+<h2>My Checklists</h2>
+
+<form asp-action="Delete" method="post">
+    <ul>
+        @foreach (var checklist in Model)
+        {
+            <li>
+                <label>
+                    <input type="checkbox" name="selectedIds" value="@checklist.ChecklistId" />
+                    @checklist.Title
+                </label>
+            </li>
+        }
+    </ul>
+    <button type="submit">Delete Selected</button>
+</form>

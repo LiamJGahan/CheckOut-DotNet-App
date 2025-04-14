@@ -26,6 +26,18 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Liam\Desktop\CheckOut-DotNet-App\CheckOut
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/Checklists/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tsaXN0c1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/Checklists/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tsaXN0c1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/Checklists/Read.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tsaXN0c1xSZWFkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -40,6 +52,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/ToDos/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9Eb3NcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/ToDos/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9Eb3NcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/ToDos/Read.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9Eb3NcUmVhZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/_ViewImports.cshtml]

@@ -1,0 +1,15 @@
+@model CheckOut.Models.Checklist
+
+<h2>Create Checklist</h2>
+
+<form method="post">
+    <div>
+        <label for="ChecklistId">ChecklistId</label>
+        <input type="int" id="ChecklistId" name="ChecklistId" value="@Model.ChecklistId" required />
+    </div>
+    <div>
+        <label for="Title">Title</label>
+        <input type="text" id="Title" name="Title" value="@Model.Title" required />
+    </div>
+    <button type="submit">Create</button>
+</form>
