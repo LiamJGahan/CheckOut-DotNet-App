@@ -1,15 +1,15 @@
-@model List<CheckOut.Models.Checklist>
+@model List<CheckOut.Models.ToDo>
 
-<h2>My Checklists</h2>
+<h2>My toDos</h2>
 
 <form asp-action="Delete" method="post">
     <ul>
-        @foreach (var checklist in Model)
+        @foreach (var toDo in Model)
         {
             <li>
                 <label>
-                    <input type="checkbox" name="selectedIds" value="@checklist.ChecklistId" />
-                    @checklist.Title
+                    <input type="checkbox" name="selectedIds" value=" ToDoId" />
+                     toDo.Title
                 </label>
             </li>
         }

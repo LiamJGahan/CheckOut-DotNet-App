@@ -1,3 +1,4 @@
+using CheckOut.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CheckOut.Models
@@ -16,19 +17,25 @@ namespace CheckOut.Models
         [HttpGet("Create")]
         public IActionResult Create()
         {   
-            return View(new Checklist());
+            return View(new ChecklistViewModel());
         }
 
         [HttpPost("Create")]
-        public IActionResult Create(Checklist checklist)
-        {   
-            if (ModelState.IsValid)
+        public IActionResult Create(ChecklistViewModel model)
+        {
+            var checklist = new Checklist
             {
-                checklists.Add(checklist);
-                return RedirectToAction("Index", "Home");
-            }
+                Title = model.Title,
+                DateCreated = DateTime.Now,
+                ToDos = model.ToDoDescriptions
+                    .Where(description => !string.IsNullOrWhiteSpace(description))
+                    .Select(description => new ToDo { Description = description })
+                    .ToList()
+            };
 
-            return View(checklist);
+            checklists.Add(checklist);
+
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet("Delete")]

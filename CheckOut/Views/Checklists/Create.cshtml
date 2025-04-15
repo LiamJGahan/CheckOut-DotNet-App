@@ -1,15 +1,31 @@
-@model CheckOut.Models.Checklist
+@model CheckOut.ViewModels.ChecklistViewModel
 
-<h2>Create Checklist</h2>
+<form method="post" asp-action="Create">
+    <label for="title">Checklist Title</label>
+    <input type="text" name="Title" id="title" required />
 
-<form method="post">
-    <div>
-        <label for="ChecklistId">ChecklistId</label>
-        <input type="int" id="ChecklistId" name="ChecklistId" value="@Model.ChecklistId" required />
+    <h4>To-Do Items</h4>
+    <div id="todos">
+        <input type="textbox" name="ToDoDescriptions" placeholder="ToDo 1" /><br>
     </div>
-    <div>
-        <label for="Title">Title</label>
-        <input type="text" id="Title" name="Title" value="@Model.Title" required />
-    </div>
-    <button type="submit">Create</button>
+
+    <button type="button" id="addToDo">Add ToDo</button>
+    <button type="submit">Create Checklist</button>
 </form>
+
+<script>
+    let count = 2;
+    document.getElementById('addToDo').addEventListener('click', function () {
+    const container = document.getElementById('todos');
+
+    const newInput = document.createElement('input');
+    newInput.type = 'text';
+    newInput.name = 'ToDoDescriptions';
+    newInput.placeholder = 'ToDo ' + count++;
+
+    const breakLine = document.createElement('br');
+
+    container.appendChild(newInput);
+    container.appendChild(breakLine);
+    });
+</script>
