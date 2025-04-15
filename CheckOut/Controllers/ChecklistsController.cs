@@ -8,7 +8,7 @@ namespace CheckOut.Models
     {     
         private static List<Checklist> checklists = new List<Checklist>();
 
-        // Read has been changed to ReadCurrent for archived to be introduced
+        // Returns the currently active checklists
         [HttpGet("ReadCurrent")]
         public IActionResult ReadCurrent()
         {   
@@ -23,6 +23,23 @@ namespace CheckOut.Models
             }
 
             return View(currentLists);
+        }
+
+        // Return the archived checklists
+        [HttpGet("ReadArchived")]
+        public IActionResult ReadArchived()
+        {   
+            List<Checklist> Archive = new List<Checklist>();
+
+            foreach (Checklist checklist in checklists)
+            {
+                if (checklist.IsArchived)
+                {
+                    Archive.Add(checklist);
+                }
+            }
+
+            return View(Archive);
         }
 
         [HttpGet("Create")]

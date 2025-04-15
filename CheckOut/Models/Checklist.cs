@@ -8,5 +8,8 @@ namespace CheckOut.Models
         public bool IsArchived { get; set; } = false;
 
         public List<ToDo> ToDos { get; set; } = new List<ToDo>();
+
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }
