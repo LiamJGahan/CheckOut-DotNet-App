@@ -8,10 +8,21 @@ namespace CheckOut.Models
     {     
         private static List<Checklist> checklists = new List<Checklist>();
 
-        [HttpGet("Read")]
-        public IActionResult Read()
+        // Read has been changed to ReadCurrent for archived to be introduced
+        [HttpGet("ReadCurrent")]
+        public IActionResult ReadCurrent()
         {   
-            return View(checklists);
+            List<Checklist> currentLists = new List<Checklist>();
+
+            foreach (Checklist checklist in checklists)
+            {
+                if (!checklist.IsArchived)
+                {
+                    currentLists.Add(checklist);
+                }
+            }
+
+            return View(currentLists);
         }
 
         [HttpGet("Create")]
@@ -23,6 +34,7 @@ namespace CheckOut.Models
         [HttpPost("Create")]
         public IActionResult Create(ChecklistViewModel model)
         {
+            // Need to research if there is a better way to do this
             var checklist = new Checklist
             {
                 Title = model.Title,
@@ -66,6 +78,21 @@ namespace CheckOut.Models
             }
 
             return RedirectToAction("Index", "Home");
+        }
+
+        // Details is for veiwing a single Checklist by ID (might name change later)
+        [HttpGet("Details/{id}")]
+        public IActionResult Details(int id)
+        {
+            foreach (Checklist checklist in checklists)
+            {
+                if (checklist.ChecklistId == id)
+                {
+                    return View(checklist);
+                }
+            }
+
+            return NotFound();
         }
     }
 }

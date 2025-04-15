@@ -1,0 +1,16 @@
+@model CheckOut.Models.Checklist
+
+<h2>@Model.Title</h2>
+<p>Created on: @Model.DateCreated</p>
+
+<h3>ToDos:</h3>
+<ul>
+@foreach (var todo in Model.ToDos)
+{
+    <li>
+        @todo.Description
+    </li>
+}
+</ul>
+
+<a asp-action="ReadCurrent">Back to Current Checklists</a>
