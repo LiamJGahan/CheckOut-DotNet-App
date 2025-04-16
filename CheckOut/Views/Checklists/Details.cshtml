@@ -4,13 +4,19 @@
 <p>Created on: @Model.DateCreated</p>
 
 <h3>ToDos:</h3>
-<ul>
-@foreach (var todo in Model.ToDos)
-{
-    <li>
-        @todo.Description 
-    </li>
-}
-</ul>    
+
+<form asp-controller="ToDos" asp-action="SetCompleted" method="post">
+    <input type="hidden" name="checklistId" value="@Model.ChecklistId" />
+    <ul>
+        @foreach (var todo in Model.ToDos)
+        {
+            <li>
+                @todo.Description - 
+                <input type="checkbox" name="completedToDoIds" value="@todo.ToDoId" @(todo.IsComplete ? "checked disabled" : "") />
+            </li>
+        }
+    </ul> 
+    <button type="submit">Save Changes</button>
+</form>
 
 <a asp-action="ReadCurrent">Back to Current Checklists</a>

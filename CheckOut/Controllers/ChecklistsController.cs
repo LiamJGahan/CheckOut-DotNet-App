@@ -106,16 +106,16 @@ namespace CheckOut.Models
         [HttpGet("Details/{id}")]
         public async Task<IActionResult> Details(int id)
         {
-            var checklist = await _context.Checklists
-                .Include(c => c.ToDos)
-                .FirstOrDefaultAsync(c => c.ChecklistId == id);
+            var selectedChecklist = await _context.Checklists
+                .Include(checklist => checklist.ToDos)
+                .FirstOrDefaultAsync(checklist => checklist.ChecklistId == id);
 
-            if (checklist == null)
+            if (selectedChecklist == null)
             {
                 return NotFound();
             }
 
-            return View(checklist);
+            return View(selectedChecklist);
         }
     }
 }

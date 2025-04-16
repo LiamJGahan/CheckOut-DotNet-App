@@ -1,64 +1,34 @@
+using CheckOut.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CheckOut.Models
 {
     [Route("ToDos")]
     public class ToDosController : Controller
     {     
-        private static List<ToDo> ToDos = new List<ToDo>();
+        private readonly CheckOutContext _context;
 
-        [HttpGet("Read")]
-        public IActionResult Read()
-        {   
-            return View(ToDos);
-        }
-
-        [HttpGet("Create")]
-        public IActionResult Create()
-        {   
-            return View(new ToDo());
-        }
-
-        [HttpPost("Create")]
-        public IActionResult Create(ToDo toDo)
-        {   
-            if (ModelState.IsValid)
-            {
-                ToDos.Add(toDo);
-                return RedirectToAction("Index", "Home");
-            }
-
-            return View(toDo);
-        }
-
-        [HttpGet("Delete")]
-        public IActionResult Delete()
-        {   
-            return View(ToDos);
-        }
-
-        [HttpPost("Delete")]
-        public IActionResult Delete(List<int> selectedIds)
+        public ToDosController(CheckOutContext context)
         {
-            List<ToDo> toDelete = new List<ToDo>();
+            _context = context;
+        }
 
-            foreach (ToDo list in ToDos)
+        [HttpPost("SetCompleted")]
+        public async Task<IActionResult> SetCompleted([FromForm] int checklistId, [FromForm] List<int> completedToDoIds)
+        {
+            var toDos = await _context.ToDos
+                .Where(todo => todo.ChecklistId == checklistId)
+                .ToListAsync();
+
+            foreach (var toDo in toDos)
             {
-                foreach (int id in selectedIds)
-                {
-                    if (id == list.ToDoId)
-                    {
-                        toDelete.Add(list);
-                    }
-                }
+                toDo.IsComplete = completedToDoIds.Contains(toDo.ToDoId);
             }
 
-            foreach (var list in toDelete)
-            {
-                ToDos.Remove(list);
-            }
+            await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Details", "Checklists", new { id = checklistId });
         }
     }
 }
