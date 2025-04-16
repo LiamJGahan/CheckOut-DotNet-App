@@ -1,45 +1,42 @@
+using CheckOut.Data;
 using CheckOut.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CheckOut.Models
 {
     [Route("Checklists")]
     public class ChecklistsController : Controller
     {     
-        private static List<Checklist> checklists = new List<Checklist>();
+        private readonly CheckOutContext _context;
+
+        public ChecklistsController(CheckOutContext context)
+        {
+            _context = context;
+        }
 
         // Returns the currently active checklists
         [HttpGet("ReadCurrent")]
-        public IActionResult ReadCurrent()
+        public async Task<IActionResult> ReadCurrent()
         {   
-            List<Checklist> currentLists = new List<Checklist>();
+            List<Checklist> checklists = await _context.Checklists
+                .Include(checklist => checklist.ToDos)
+                .Where(checklist => !checklist.IsArchived)
+                .ToListAsync();
 
-            foreach (Checklist checklist in checklists)
-            {
-                if (!checklist.IsArchived)
-                {
-                    currentLists.Add(checklist);
-                }
-            }
-
-            return View(currentLists);
+            return View(checklists);
         }
 
         // Return the archived checklists
         [HttpGet("ReadArchived")]
-        public IActionResult ReadArchived()
+        public async Task<IActionResult> ReadArchived()
         {   
-            List<Checklist> Archive = new List<Checklist>();
+            List<Checklist> checklists = await _context.Checklists
+                .Include(checklist => checklist.ToDos)
+                .Where(checklist => checklist.IsArchived)
+                .ToListAsync();
 
-            foreach (Checklist checklist in checklists)
-            {
-                if (checklist.IsArchived)
-                {
-                    Archive.Add(checklist);
-                }
-            }
-
-            return View(Archive);
+            return View(checklists);
         }
 
         [HttpGet("Create")]
@@ -49,34 +46,40 @@ namespace CheckOut.Models
         }
 
         [HttpPost("Create")]
-        public IActionResult Create(ChecklistViewModel model)
+        public async Task<IActionResult> Create(ChecklistViewModel model)
         {
-            // Need to research if there is a better way to do this
-            var checklist = new Checklist
+            // Add user check here later
+
+            Checklist checklist = new Checklist
             {
                 Title = model.Title,
                 DateCreated = DateTime.Now,
                 ToDos = model.ToDoDescriptions
                     .Where(description => !string.IsNullOrWhiteSpace(description))
                     .Select(description => new ToDo { Description = description })
-                    .ToList()
+                    .ToList(),
+                UserId = 1 //relate this to user
             };
 
-            checklists.Add(checklist);
+            _context.Checklists.Add(checklist);
+            await _context.SaveChangesAsync();
 
             return RedirectToAction("Index", "Home");
         }
 
         [HttpGet("Delete")]
-        public IActionResult Delete()
+        public async Task<IActionResult> Delete()
         {   
+            List<Checklist> checklists = await _context.Checklists.ToListAsync();
+
             return View(checklists);
         }
 
         [HttpPost("Delete")]
-        public IActionResult Delete(List<int> selectedIds)
+        public async Task<IActionResult> Delete(List<int> selectedIds)
         {
             List<Checklist> toDelete = new List<Checklist>();
+            List<Checklist> checklists = await _context.Checklists.ToListAsync();
 
             foreach (Checklist list in checklists)
             {
@@ -89,27 +92,30 @@ namespace CheckOut.Models
                 }
             }
 
-            foreach (var list in toDelete)
+            foreach (Checklist list in toDelete)
             {
-                checklists.Remove(list);
+                _context.Checklists.Remove(list);
             }
+
+            await _context.SaveChangesAsync();
 
             return RedirectToAction("Index", "Home");
         }
 
-        // Details is for veiwing a single Checklist by ID (might name change later)
+        // Details is for veiwing a single Checklist by ID
         [HttpGet("Details/{id}")]
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            foreach (Checklist checklist in checklists)
+            var checklist = await _context.Checklists
+                .Include(c => c.ToDos)
+                .FirstOrDefaultAsync(c => c.ChecklistId == id);
+
+            if (checklist == null)
             {
-                if (checklist.ChecklistId == id)
-                {
-                    return View(checklist);
-                }
+                return NotFound();
             }
 
-            return NotFound();
+            return View(checklist);
         }
     }
 }

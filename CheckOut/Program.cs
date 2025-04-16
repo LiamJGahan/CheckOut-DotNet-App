@@ -4,7 +4,12 @@ using CheckOut.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+        options.JsonSerializerOptions.WriteIndented = true;
+    }); // Models were causing circular references so this was added to point to the parent
 
 // Add EF and string connection (currently using secrets)
 builder.Services.AddDbContext<CheckOutContext>(options =>
