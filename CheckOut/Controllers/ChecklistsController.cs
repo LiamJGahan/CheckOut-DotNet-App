@@ -67,39 +67,37 @@ namespace CheckOut.Models
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet("Delete")]
-        public async Task<IActionResult> Delete()
-        {   
-            List<Checklist> checklists = await _context.Checklists.ToListAsync();
-
-            return View(checklists);
-        }
-
         [HttpPost("Delete")]
-        public async Task<IActionResult> Delete(List<int> selectedIds)
+        public async Task<IActionResult> Delete([FromForm] int checklistId)
         {
-            List<Checklist> toDelete = new List<Checklist>();
-            List<Checklist> checklists = await _context.Checklists.ToListAsync();
+            bool isArchived = false;
 
-            foreach (Checklist list in checklists)
+            var checklist = await _context.Checklists
+                .Include(c => c.ToDos)
+                .FirstOrDefaultAsync(c => c.ChecklistId == checklistId);
+
+            if (checklist != null)
             {
-                foreach (int id in selectedIds)
-                {
-                    if (id == list.ChecklistId)
-                    {
-                        toDelete.Add(list);
-                    }
-                }
+                if (checklist.IsArchived){isArchived = true;}
+
+                _context.ToDos.RemoveRange(checklist.ToDos); 
+                _context.Checklists.Remove(checklist);  
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                // Add a problem response here
+                return RedirectToAction("Index", "Home");
             }
 
-            foreach (Checklist list in toDelete)
+            if (isArchived)
             {
-                _context.Checklists.Remove(list);
+                return RedirectToAction("ReadArchived", "Checklists");
             }
-
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction("Index", "Home");
+            else
+            {
+                return RedirectToAction("ReadCurrent", "Checklists");
+            }
         }
 
         // Details is for veiwing a single Checklist by ID
