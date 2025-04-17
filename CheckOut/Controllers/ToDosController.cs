@@ -23,7 +23,10 @@ namespace CheckOut.Models
 
             foreach (var toDo in toDos)
             {
-                toDo.IsComplete = completedToDoIds.Contains(toDo.ToDoId);
+                if (completedToDoIds.Contains(toDo.ToDoId) && !toDo.IsComplete)
+                {
+                    toDo.IsComplete = true;
+                }
             }
 
             await _context.SaveChangesAsync();
