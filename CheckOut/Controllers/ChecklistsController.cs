@@ -117,5 +117,20 @@ namespace CheckOut.Models
 
             return View(selectedChecklist);
         }
+
+        [HttpPost("SetArchived")]
+        public async Task<IActionResult> SetArchived([FromForm] int checklistId)
+        {
+            var checklist = await _context.Checklists
+                .FirstOrDefaultAsync(checklist => checklist.ChecklistId == checklistId);
+
+            if (checklist != null)
+            {
+                checklist.IsArchived = true;
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("ReadCurrent", "Checklists");
+        }
     }
 }
