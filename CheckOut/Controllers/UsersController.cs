@@ -1,4 +1,5 @@
 using CheckOut.Data;
+using CheckOut.Helpers;
 using CheckOut.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,16 +28,34 @@ namespace CheckOut.Controllers
             var account = await _context.Users
                 .FirstOrDefaultAsync(user => user.Username == username);
 
-            if (account == null || account.Password != password)
+            var hashedPassword = PasswordHash.Hash(password);
+
+            if (hashedPassword == null) 
+            { 
+                // Add a login unsuccessfull page
+                return RedirectToAction("Login", "Users"); 
+            }
+
+            if (account == null || account.Password != hashedPassword)
             {
                 // Add a login unsuccessfull page
                 return RedirectToAction("Login", "Users");
             }
+            else
+            {
+                if (account.Password == hashedPassword)
+                {
+                    HttpContext.Session.SetInt32("UserId", account.UserId);
+                    HttpContext.Session.SetString("Username", account.Username);
 
-            HttpContext.Session.SetInt32("UserId", account.UserId);
-            HttpContext.Session.SetString("Username", account.Username);
-
-            return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    // Add a login unsuccessfull page
+                    return RedirectToAction("Login", "Users"); 
+                }
+            }
         }
 
         [HttpGet("Logout")]
@@ -67,13 +86,20 @@ namespace CheckOut.Controllers
                 
                 if (account.Username == username)
                 {
+                    // Add a Registration unsuccessfull page
                     return RedirectToAction("Register", "Users");
                 }
             }
 
-            user.UserId = highestId++;
+            var hashedPassword = PasswordHash.Hash(password);
+            if (hashedPassword == null) 
+            { 
+                // Add a Registration unsuccessfull page
+                return RedirectToAction("Login", "Users"); 
+            }
+
             user.Username = username;
-            user.Password = password;
+            user.Password = hashedPassword;
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
