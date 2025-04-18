@@ -64,4 +64,4 @@ jobs:
         with:
           app-name: 'CheckOut'
           slot-name: 'Production'
-          package: ${{env.DOTNET_ROOT}}/myapp  # Use the path to the published app
+          package: publish
