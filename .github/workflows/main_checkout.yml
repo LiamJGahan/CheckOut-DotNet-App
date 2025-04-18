@@ -64,4 +64,4 @@ jobs:
         with:
           app-name: 'CheckOut'
           slot-name: 'Production'
-          package: publish
+          package: .
