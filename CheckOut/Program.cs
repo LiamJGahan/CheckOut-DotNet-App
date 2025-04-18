@@ -11,7 +11,10 @@ builder.Services.AddControllersWithViews()
         options.JsonSerializerOptions.WriteIndented = true;
     }); // Models were causing circular references so this was added to point to the parent
 
-// Add EF and string connection (currently using secrets)
+// For using sessions
+builder.Services.AddSession();
+
+// Adds EF and string connection (currently using secrets)
 builder.Services.AddDbContext<CheckOutContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), 
         sqlOptions => sqlOptions.EnableRetryOnFailure())); // Added this due to cloud transient error
@@ -30,6 +33,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 

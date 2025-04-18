@@ -1,4 +1,5 @@
 using CheckOut.Data;
+using CheckOut.Sessions;
 using CheckOut.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,39 +17,47 @@ namespace CheckOut.Models
         }
 
         // Returns the currently active checklists
+        [UserSession]
         [HttpGet("ReadCurrent")]
         public async Task<IActionResult> ReadCurrent()
         {   
+            int userId = HttpContext.Session.GetInt32("UserId")!.Value;
+
             List<Checklist> checklists = await _context.Checklists
                 .Include(checklist => checklist.ToDos)
-                .Where(checklist => !checklist.IsArchived)
+                .Where(checklist => !checklist.IsArchived && checklist.UserId == userId)
                 .ToListAsync();
 
             return View(checklists);
         }
 
         // Return the archived checklists
+        [UserSession]
         [HttpGet("ReadArchived")]
         public async Task<IActionResult> ReadArchived()
         {   
+            int userId = HttpContext.Session.GetInt32("UserId")!.Value;
+
             List<Checklist> checklists = await _context.Checklists
                 .Include(checklist => checklist.ToDos)
-                .Where(checklist => checklist.IsArchived)
+                .Where(checklist => checklist.IsArchived && checklist.UserId == userId)
                 .ToListAsync();
 
             return View(checklists);
         }
 
+        [UserSession]
         [HttpGet("Create")]
         public IActionResult Create()
         {   
             return View(new ChecklistViewModel());
         }
 
+        [UserSession]
         [HttpPost("Create")]
         public async Task<IActionResult> Create(ChecklistViewModel model)
         {
-            // Add user check here later
+            int userId = HttpContext.Session.GetInt32("UserId")!.Value;
 
             Checklist checklist = new Checklist
             {
@@ -58,7 +67,7 @@ namespace CheckOut.Models
                     .Where(description => !string.IsNullOrWhiteSpace(description))
                     .Select(description => new ToDo { Description = description })
                     .ToList(),
-                UserId = 1 //relate this to user
+                UserId = userId
             };
 
             _context.Checklists.Add(checklist);
@@ -67,14 +76,17 @@ namespace CheckOut.Models
             return RedirectToAction("Index", "Home");
         }
 
+        [UserSession]
         [HttpPost("Delete")]
         public async Task<IActionResult> Delete([FromForm] int checklistId)
         {
+            int userId = HttpContext.Session.GetInt32("UserId")!.Value;
+
             bool isArchived = false;
 
             var checklist = await _context.Checklists
                 .Include(c => c.ToDos)
-                .FirstOrDefaultAsync(c => c.ChecklistId == checklistId);
+                .FirstOrDefaultAsync(c => c.ChecklistId == checklistId && c.UserId == userId);
 
             if (checklist != null)
             {
@@ -101,12 +113,15 @@ namespace CheckOut.Models
         }
 
         // Details is for veiwing a single Checklist by ID
+        [UserSession]
         [HttpGet("Details/{id}")]
         public async Task<IActionResult> Details(int id)
         {
+            int userId = HttpContext.Session.GetInt32("UserId")!.Value;
+
             var selectedChecklist = await _context.Checklists
                 .Include(checklist => checklist.ToDos)
-                .FirstOrDefaultAsync(checklist => checklist.ChecklistId == id);
+                .FirstOrDefaultAsync(checklist => checklist.ChecklistId == id && checklist.UserId == userId);
 
             if (selectedChecklist == null)
             {
@@ -116,11 +131,14 @@ namespace CheckOut.Models
             return View(selectedChecklist);
         }
 
+        [UserSession]
         [HttpPost("SetArchived")]
         public async Task<IActionResult> SetArchived([FromForm] int checklistId)
         {
+            int userId = HttpContext.Session.GetInt32("UserId")!.Value;
+
             var checklist = await _context.Checklists
-                .FirstOrDefaultAsync(checklist => checklist.ChecklistId == checklistId);
+                .FirstOrDefaultAsync(checklist => checklist.ChecklistId == checklistId && checklist.UserId == userId);
 
             if (checklist != null)
             {
