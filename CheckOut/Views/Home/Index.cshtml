@@ -1,8 +1,9 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Welcome";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1><br>
-    <a class="text-dark" asp-area="" asp-controller="Checklists" asp-action="ReadCurrent"><h2>View Lists</h2></a>
+    <h1 class="display-4">@ViewData["Title"]</h1><br>
+
+    <a class="text-dark" asp-area="" asp-controller="Users" asp-action="Login"><h2>View Lists</h2></a>
 </div>

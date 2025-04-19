@@ -22,6 +22,18 @@ namespace CheckOut.Controllers
             return View();
         }
 
+        [HttpGet("LoginFailed")]
+        public IActionResult LoginFailed()
+        {
+            return View();
+        }
+
+        [HttpGet("LoginSuccess")]
+        public IActionResult LoginSuccess()
+        {
+            return View();
+        }
+
         [HttpPost("Login")]
         public async Task<IActionResult> Login(string username, string password)
         {
@@ -33,13 +45,13 @@ namespace CheckOut.Controllers
             if (hashedPassword == null) 
             { 
                 // Add a login unsuccessfull page
-                return RedirectToAction("Login", "Users"); 
+                return RedirectToAction("LoginFailed", "Users"); 
             }
 
             if (account == null || account.Password != hashedPassword)
             {
                 // Add a login unsuccessfull page
-                return RedirectToAction("Login", "Users");
+                return RedirectToAction("LoginFailed", "Users");
             }
             else
             {
@@ -48,12 +60,12 @@ namespace CheckOut.Controllers
                     HttpContext.Session.SetInt32("UserId", account.UserId);
                     HttpContext.Session.SetString("Username", account.Username);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("LoginSuccess", "Users");
                 }
                 else
                 {
                     // Add a login unsuccessfull page
-                    return RedirectToAction("Login", "Users"); 
+                    return RedirectToAction("LoginFailed", "Users"); 
                 }
             }
         }
@@ -71,10 +83,22 @@ namespace CheckOut.Controllers
             return View(new User());
         }
 
+        [HttpGet("RegisterFailed")]
+        public IActionResult RegisterFailed()
+        {
+            return View();
+        }
+
+        [HttpGet("RegisterSuccess")]
+        public IActionResult RegisterSuccess()
+        {
+            return View();
+        }
+
         [HttpPost("Register")]
         public async Task<IActionResult> Register(string username, string password, string confirmation)
         {
-            if (password != confirmation){ return RedirectToAction("Register", "Users"); }
+            if (password != confirmation){ return RedirectToAction("RegisterFailed", "Users"); }
 
             List<User> accounts = await _context.Users.ToListAsync();
             User user = new User();
@@ -87,7 +111,7 @@ namespace CheckOut.Controllers
                 if (account.Username == username)
                 {
                     // Add a Registration unsuccessfull page
-                    return RedirectToAction("Register", "Users");
+                    return RedirectToAction("RegisterFailed", "Users");
                 }
             }
 
@@ -95,7 +119,7 @@ namespace CheckOut.Controllers
             if (hashedPassword == null) 
             { 
                 // Add a Registration unsuccessfull page
-                return RedirectToAction("Login", "Users"); 
+                return RedirectToAction("RegisterFailed", "Users"); 
             }
 
             user.Username = username;
@@ -104,7 +128,7 @@ namespace CheckOut.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Login", "Users");
+            return RedirectToAction("RegisterSuccess", "Users");
         }
 
         [HttpGet("Test")]

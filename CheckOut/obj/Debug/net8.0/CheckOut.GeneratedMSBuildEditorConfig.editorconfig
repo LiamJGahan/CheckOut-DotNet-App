@@ -58,24 +58,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/ToDos/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9Eb3NcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/ToDos/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9Eb3NcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/ToDos/Read.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9Eb3NcUmVhZC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/Users/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/Users/LoginFailed.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcTG9naW5GYWlsZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/Users/LoginSuccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcTG9naW5TdWNjZXNzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/Users/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcUmVnaXN0ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/Users/RegisterFailed.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcUmVnaXN0ZXJGYWlsZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/Users/RegisterSuccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcUmVnaXN0ZXJTdWNjZXNzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Liam/Desktop/CheckOut-DotNet-App/CheckOut/Views/_ViewImports.cshtml]
