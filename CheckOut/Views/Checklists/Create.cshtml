@@ -1,17 +1,19 @@
 @model CheckOut.ViewModels.ChecklistViewModel
 
-<form method="post" asp-action="Create">
-    <h4>Checklist Title</h4>
-    <input type="text" name="Title" id="title" required />
+<div class="text-center">
+    <form method="post" asp-action="Create">
+        <h4>Checklist Title</h4>
+        <input type="text" name="Title" id="title" required />
 
-    <h4>ToDo Tasks</h4>
-    <div id="todos">
-        <input type="textbox" name="ToDoDescriptions" placeholder="ToDo 1" /><br>
-    </div>
+        <h4>ToDo Tasks</h4>
+        <div id="todos">
+            <input type="textbox" name="ToDoDescriptions" placeholder="ToDo 1" /><br>
+        </div>
 
-    <button type="button" id="addToDo">Add ToDo</button><br>
-    <button type="submit">Create Checklist</button>
-</form>
+        <button type="button" id="addToDo">Add ToDo</button><br>
+        <button type="submit">Create Checklist</button>
+    </form>
+</div>
 
 <script>
     // Add a new ToDo

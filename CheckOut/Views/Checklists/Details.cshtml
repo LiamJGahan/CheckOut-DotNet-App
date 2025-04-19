@@ -1,22 +1,24 @@
 @model CheckOut.Models.Checklist
 
-<h2>@Model.Title</h2>
-<p>Created on: @Model.DateCreated</p>
+<div class="text-center">
+    <h2>@Model.Title</h2>
+    <p>Created on: @Model.DateCreated</p>
 
-<h3>ToDos:</h3>
+    <h3>ToDos:</h3>
 
-<form asp-controller="ToDos" asp-action="SetCompleted" method="post">
-    <input type="hidden" name="checklistId" value="@Model.ChecklistId" />
-    <ul>
-        @foreach (var todo in Model.ToDos)
-        {
-            <li>
-                @todo.Description - 
-                <input type="checkbox" name="completedToDoIds" value="@todo.ToDoId" @(todo.IsComplete ? "checked disabled" : "") />
-            </li>
-        }
-    </ul> 
-    <button type="submit">Save Changes</button>
-</form>
+    <form asp-controller="ToDos" asp-action="SetCompleted" method="post">
+        <input type="hidden" name="checklistId" value="@Model.ChecklistId" />
+        <ul>
+            @foreach (var todo in Model.ToDos)
+            {
+                <li>
+                    @todo.Description - 
+                    <input type="checkbox" name="completedToDoIds" value="@todo.ToDoId" @(todo.IsComplete ? "checked disabled" : "") />
+                </li>
+            }
+        </ul> 
+        <button type="submit">Save Changes</button>
+    </form>
 
-<a asp-action="ReadCurrent">Back to Current Checklists</a>
+    <a asp-controller="Checklists"asp-action="ReadCurrent">Back to Current Checklists</a>
+</div>
