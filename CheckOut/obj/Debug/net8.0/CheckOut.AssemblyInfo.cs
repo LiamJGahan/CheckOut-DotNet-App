@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CheckOut")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a0f96c4e6de135abb6137e05dd3d1dffc637e474")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+42afb886f43c5907a16d89e2d5aee3c1fcbeeea5")]
 [assembly: System.Reflection.AssemblyProductAttribute("CheckOut")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CheckOut")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

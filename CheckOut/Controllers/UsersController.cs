@@ -44,13 +44,11 @@ namespace CheckOut.Controllers
 
             if (hashedPassword == null) 
             { 
-                // Add a login unsuccessfull page
                 return RedirectToAction("LoginFailed", "Users"); 
             }
 
             if (account == null || account.Password != hashedPassword)
             {
-                // Add a login unsuccessfull page
                 return RedirectToAction("LoginFailed", "Users");
             }
             else
@@ -64,7 +62,6 @@ namespace CheckOut.Controllers
                 }
                 else
                 {
-                    // Add a login unsuccessfull page
                     return RedirectToAction("LoginFailed", "Users"); 
                 }
             }
@@ -116,7 +113,6 @@ namespace CheckOut.Controllers
                 
                 if (account.Username == username)
                 {
-                    // Add a Registration unsuccessfull page
                     return RedirectToAction("RegisterFailed", "Users");
                 }
             }
@@ -124,7 +120,6 @@ namespace CheckOut.Controllers
             var hashedPassword = PasswordHash.Hash(password);
             if (hashedPassword == null) 
             { 
-                // Add a Registration unsuccessfull page
                 return RedirectToAction("RegisterFailed", "Users"); 
             }
 
@@ -135,13 +130,6 @@ namespace CheckOut.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction("RegisterSuccess", "Users");
-        }
-
-        [HttpGet("Test")]
-        public IActionResult SessionTest()
-        {
-            var user = HttpContext.Session.GetString("Username");
-            return Content($"Logged in as: {user}");
         }
     }
 }
