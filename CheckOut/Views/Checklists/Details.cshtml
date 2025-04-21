@@ -8,7 +8,7 @@
 
     <form asp-controller="ToDos" asp-action="SetCompleted" method="post">
         <input type="hidden" name="checklistId" value="@Model.ChecklistId" />
-        <ul>
+        <ul class="centered-list">
             @foreach (var todo in Model.ToDos)
             {
                 <li>
@@ -20,5 +20,5 @@
         <button type="submit">Save Changes</button>
     </form>
 
-    <a asp-controller="Checklists"asp-action="ReadCurrent">Back to Current Checklists</a>
+    <a asp-controller="Home"asp-action="Index">Back To Home</a>
 </div>

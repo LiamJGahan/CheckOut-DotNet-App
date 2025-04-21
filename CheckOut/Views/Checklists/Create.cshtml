@@ -1,11 +1,13 @@
 @model CheckOut.ViewModels.ChecklistViewModel
 
 <div class="text-center">
+    <h2>Create New Checklist</h2>
+
     <form method="post" asp-action="Create">
-        <h4>Checklist Title</h4>
+        <h3>Checklist Title</h3>
         <input type="text" name="Title" id="title" required />
 
-        <h4>ToDo Tasks</h4>
+        <h3>ToDo Tasks</h3>
         <div id="todos">
             <input type="textbox" name="ToDoDescriptions" placeholder="ToDo 1" /><br>
         </div>

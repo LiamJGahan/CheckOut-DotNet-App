@@ -20,3 +20,14 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.completed {
+  opacity: 0.6;
+  color: #777;
+}
+
+.centered-list {
+  list-style-position: inside;
+  text-align: center;
+  padding-left: 0;
+}
