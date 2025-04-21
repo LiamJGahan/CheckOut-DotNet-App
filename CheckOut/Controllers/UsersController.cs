@@ -74,7 +74,13 @@ namespace CheckOut.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("LogoutSuccess", "Users");
+        }
+
+        [HttpGet("LogoutSuccess")]
+        public IActionResult LogoutSuccess()
+        {
+            return View();
         }
 
         [HttpGet("Register")]
