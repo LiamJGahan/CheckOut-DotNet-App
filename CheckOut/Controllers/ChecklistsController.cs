@@ -108,7 +108,7 @@ namespace CheckOut.Models
             }
             else
             {
-                return RedirectToAction("ReadCurrent", "Checklists");
+                return RedirectToAction("Index", "Home");
             }
         }
 

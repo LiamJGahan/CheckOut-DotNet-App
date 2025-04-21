@@ -46,11 +46,4 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
-
-    [HttpGet("GetUsername")]
-    public IActionResult SessionTest()
-    {
-        string? user = HttpContext.Session.GetString("Username");
-        return Content(user);
-    }
 }
