@@ -146,7 +146,7 @@ namespace CheckOut.Models
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToAction("ReadCurrent", "Checklists");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
