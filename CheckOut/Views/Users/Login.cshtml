@@ -2,14 +2,39 @@
 
 <div class="text-center">
     <form method="post" asp-action="Login">
-        <h3>Login</h3>
+        <h2>Login</h2>
 
-        <label>Username</label>
-        <input type="text" name="username" placeholder="Enter Username" required /><br>
+        <div class="border-top border-bottom py-3 my-3">
+            <div class="row justify-content-center">
+                <div class="col-sm-6"> 
 
-        <label>Password</label>
-        <input type="password" name="password" placeholder="Enter Password" required /><br>
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label text-end">
+                            <h5 class="mb-0">Username</h5>
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" name="username" placeholder="Enter Username" required />
+                        </div>
+                    </div>
 
-        <button type="submit">Enter</button>
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label text-end">
+                            <h5 class="mb-0">Password</h5>
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="password" name="password" placeholder="Enter Password" required />
+                        </div>
+                    </div>
+
+                    <div class="pt-3 mt-3">
+                        <button class="btn btn-primary btn-lg" type="submit">Enter</button>
+                    </div>
+                </div> 
+            </div>
+        </div>
     </form>
+
+    <div class="border-top border-bottom py-3 my-3">
+        <a class="text-decoration-none" asp-controller="Users" asp-action="Register">Not Yet Registered?</a>
+    </div>
 </div>

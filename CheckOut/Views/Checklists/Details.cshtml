@@ -4,21 +4,27 @@
     <h2>@Model.Title</h2>
     <p>Created on: @Model.DateCreated</p>
 
-    <h3>ToDos:</h3>
+    <h4>ToDos:</h4>
 
     <form asp-controller="ToDos" asp-action="SetCompleted" method="post">
         <input type="hidden" name="checklistId" value="@Model.ChecklistId" />
-        <ul class="centered-list">
+        <ul class="list-unstyled">
             @foreach (var todo in Model.ToDos)
             {
-                <li>
-                    @todo.Description - 
-                    <input type="checkbox" name="completedToDoIds" value="@todo.ToDoId" @(todo.IsComplete ? "checked disabled" : "") />
+                <li class="mb-2">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-sm-1 text-start" style="min-width: 200px; text-align: left;">@todo.Description</div>
+                        <div class="col-auto text-end">
+                            <input type="checkbox" name="completedToDoIds" value="@todo.ToDoId" @(todo.IsComplete ? "checked disabled" : "") />
+                        </div>
+                    </div>
                 </li>
             }
-        </ul> 
-        <button type="submit">Save Changes</button>
+        </ul>
+        <button class="btn btn-primary mt-3" type="submit">Save Changes</button>
     </form>
 
-    <a asp-controller="Home"asp-action="Index">Back To Home</a>
+    <div class="pt-3">
+        <a class="text-decoration-none" asp-controller="Home" asp-action="Index">Back To Home</a>
+    </div>
 </div>

@@ -4,33 +4,52 @@
     <h2>Create New Checklist</h2>
 
     <form method="post" asp-action="Create">
-        <h3>Checklist Title</h3>
-        <input type="text" name="Title" id="title" required />
+        <div class="border-top border-bottom py-3 my-3">
+            <div class="row mb-3">
+                <h5 class="mb-0">Checklist Title</h5>
+                <div class="col-sm-6 offset-sm-3">
+                    <input class="form-control" type="text" name="Title" id="title" required />
+                </div>
+            </div>
+            <div id="todos">
+                <div class="row mb-3">
+                    <h5 class="mb-0">ToDo Tasks</h5>
+                    <div class="col-sm-6 offset-sm-3">
+                        <input class="form-control" type="text" name="ToDoDescriptions" placeholder="ToDo 1" />
+                    </div>
+                </div>
+            </div>
 
-        <h3>ToDo Tasks</h3>
-        <div id="todos">
-            <input type="textbox" name="ToDoDescriptions" placeholder="ToDo 1" /><br>
+            <button type="button" id="addToDo" class="btn btn-secondary">Add ToDo</button><br>
+
+            <div class="pt-3 mt-3">
+                <button type="submit" class="btn btn-primary btn-lg">Create Checklist</button>
+            </div>
         </div>
-
-        <button type="button" id="addToDo">Add ToDo</button><br>
-        <button type="submit">Create Checklist</button>
     </form>
 </div>
 
 <script>
     // Add a new ToDo
-    let count = 2;
+    let count = 2; 
     document.getElementById('addToDo').addEventListener('click', function () {
-    const container = document.getElementById('todos');
+        const container = document.getElementById('todos');
 
-    const newInput = document.createElement('input');
-    newInput.type = 'text';
-    newInput.name = 'ToDoDescriptions';
-    newInput.placeholder = 'ToDo ' + count++;
+        const newRow = document.createElement('div');
+        newRow.className = 'row mb-3';
 
-    const breakLine = document.createElement('br');
+        const newDiv = document.createElement('div');
+        newDiv.className = 'col-sm-6 offset-sm-3';
 
-    container.appendChild(newInput);
-    container.appendChild(breakLine);
+        const newInput = document.createElement('input');
+        newInput.className = 'form-control';
+        newInput.type = 'text';
+        newInput.name = 'ToDoDescriptions'; 
+        newInput.placeholder = 'ToDo ' + count++;
+
+
+        newDiv.appendChild(newInput);
+        newRow.appendChild(newDiv);
+        container.appendChild(newRow);
     });
 </script>
